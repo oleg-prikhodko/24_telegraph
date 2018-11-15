@@ -27,7 +27,7 @@
     </nav>
 
     <div class="container">
-      <form method="POST">
+      <form method="POST" id="form" onsubmit="postArticle(event)">
         <div class="form-group">
           <input name="header" class="form-control" placeholder="Заголовок" autofocus/>
         </div>
@@ -42,6 +42,25 @@
         </div>
       </form>
     </div><!-- /.container -->
+
+    <script>
+      const formElement = document.getElementById("form")
+
+      function postArticle(event) {
+        event.preventDefault()
+        const formData = new FormData(formElement)
+        const formValues = {}
+        formData.forEach((value, key) => formValues[key] = value)
+        
+        fetch('/api/articles', {
+          method: 'POST',
+          headers: {"Content-Type": "application/json; charset=utf-8"},
+          body: JSON.stringify(formValues)
+        })
+          .then(response => response.text())
+          .then(data => console.log(data))
+      }
+    </script>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
