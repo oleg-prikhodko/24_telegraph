@@ -12,5 +12,9 @@ def post_article():
     print(data.get('header'), data.get('signature'), data.get('body'))
     return "Ok"
 
+@app.route('api/articles', methods=['PUT'])
+def update_article():
+    pass
+
 if __name__ == "__main__":
     app.run(debug=True)
