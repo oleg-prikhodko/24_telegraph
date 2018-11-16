@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block title %}
+    {{ article.header }}
+{% endblock %}
+
+{% block body %}
+    <h1>{{ article.header }}</h1>
+    <h3>{{ article.signature }}</h3>
+    <p>{{ article.body }}</p>
+{% endblock %}
