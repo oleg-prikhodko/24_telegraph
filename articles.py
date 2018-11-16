@@ -32,7 +32,9 @@ def load_article(article_id):
         return None
 
     with open(article_filepath) as article_file:
-        return json.load(article_file)
+        article = json.load(article_file)
+        article["id"] = article_id
+        return article
 
 
 def update_article(article_id, header=None, signature=None, body=None):
