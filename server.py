@@ -1,7 +1,7 @@
 from uuid import uuid1
 
 import articles
-from flask import Flask, render_template, request, make_response, session, abort
+from flask import Flask, render_template, request, session, abort, redirect
 
 app = Flask(__name__)
 app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
@@ -30,14 +30,16 @@ def get_article_page(article_id):
     return render_template("article.html", article=article)
 
 
-@app.route("/api/articles", methods=["POST"])
+@app.route("/post", methods=["POST"])
 def save_article():
-    response = make_response("OK")
+    article_id = articles.save_article(
+        session.get("userid"),
+        request.form.get("header"),
+        request.form.get("signature"),
+        request.form.get("body"),
+    )
 
-    data = request.json
-    print(data.get("header"), data.get("signature"), data.get("body"))
-
-    return response
+    return redirect("/articles/{}".format(article_id))
 
 
 @app.route("/sessiontest")
