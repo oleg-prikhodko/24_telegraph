@@ -7,7 +7,7 @@
 {% block body %}
     <ul>
         {% for article in article_list %}
-            <li>{{ article.header }}</li>
+            <li><a href="/articles/{{ article.id }}">{{ article.header }}</li>
         {% endfor %}
     </ul>
 {% endblock %}
