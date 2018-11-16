@@ -1,7 +1,7 @@
 from uuid import uuid1
 
 import articles
-from flask import Flask, render_template, request, make_response, session
+from flask import Flask, render_template, request, make_response, session, abort
 
 app = Flask(__name__)
 app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
@@ -17,12 +17,17 @@ def form():
 
 @app.route("/articles")
 def list_articles():
-    return render_template("list.html")
+    article_list = articles.load_all_articles()
+    return render_template("list.html", article_list=article_list)
 
 
-@app.route("/articles/<int:article_id>")
+@app.route("/articles/<article_id>")
 def get_article_page(article_id):
-    return render_template("article.html")
+    article = articles.load_article(article_id)
+    if article is None:
+        abort(404)
+
+    return render_template("article.html", article=article)
 
 
 @app.route("/api/articles", methods=["POST"])
