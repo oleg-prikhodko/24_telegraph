@@ -10,7 +10,7 @@
             <li>
                 <a href="/articles/{{ article.id }}">{{ article.header }}</a>
                 {% if session.userid == article.userid %}
-                <a href="#" class="text-danger">Edit</a>
+                <a href="/edit/{{ article.id }}" class="text-danger">Edit</a>
                 {% endif %}
             </li>
         {% endfor %}
