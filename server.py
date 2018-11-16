@@ -1,5 +1,7 @@
-from flask import Flask, render_template, request, make_response, session
 from uuid import uuid1
+
+import articles
+from flask import Flask, render_template, request, make_response, session
 
 app = Flask(__name__)
 app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
@@ -13,8 +15,18 @@ def form():
     return render_template("form.html")
 
 
+@app.route("/articles")
+def list_articles():
+    return render_template("list.html")
+
+
+@app.route("/articles/<int:article_id>")
+def get_article_page(article_id):
+    return render_template("article.html")
+
+
 @app.route("/api/articles", methods=["POST"])
-def post_article():
+def save_article():
     response = make_response("OK")
 
     data = request.json
