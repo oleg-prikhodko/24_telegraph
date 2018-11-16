@@ -48,6 +48,40 @@ def save_article():
     return redirect("/articles/{}".format(article_id))
 
 
+@app.route("/edit/<article_id>")
+def get_edit_page(article_id):
+    authenticate()
+    article = articles.load_article(article_id)
+    if article is None:
+        abort(404)
+    if article["userid"] != session.get("userid"):
+        abort(403)
+
+    return render_template("form.html", article=article)
+
+
+@app.route("/edit/<article_id>", methods=["POST"])
+def edit_article(article_id):
+    authenticate()
+    article = articles.load_article(article_id)
+    if article is None:
+        abort(404)
+    if article["userid"] != session.get("userid"):
+        abort(403)
+
+    success = articles.update_article(
+        article_id,
+        request.form.get("header"),
+        request.form.get("signature"),
+        request.form.get("body"),
+    )
+
+    if success:
+        return redirect("/articles/{}".format(article_id))
+    else:
+        abort(500)
+
+
 @app.route("/sessiontest")
 def session_test():
     return "userid: {}".format(session.get("userid"))
