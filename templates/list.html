@@ -7,7 +7,7 @@
 {% block body %}
     <ul>
         {% for article in article_list %}
-            <li>
+            <li style="margin-bottom: 1rem;">
                 <a href="/articles/{{ article.id }}">{{ article.header }}</a>
                 {% if session.userid == article.userid %}
                 <a href="/edit/{{ article.id }}" class="text-danger">Edit</a>
