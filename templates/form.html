@@ -5,29 +5,28 @@
 {% endblock %}
 
 {% block body %}
-    <div class="container">
-      <form method="POST" id="form" 
-        action="{{ '/edit/' + article.id if article else '/post' }}">
-        <div class="form-group">
-          <input name="header" class="form-control" placeholder="Заголовок" 
-            autofocus value="{{ article.header if article else '' }}"/>
-        </div>
-        <div class="form-group">
-          <input name="signature" class="form-control" placeholder="Подпись" 
-            value="{{ article.signature if article else '' }}"/>
-        </div>
-        <div class="form-group">
-          <textarea name="body" class="form-control" rows="10" placeholder="Ваша история">
-            {{- article.body if article else '' -}}
-          </textarea>
-        </div>
-        <div class="form-group">
-          <button class="btn btn-primary" type="submit">
-            {{ 'Обновить' if article else 'Опубликовать' }}
-          </button>
-        </div>
-      </form>
-    </div><!-- /.container -->
+    
+    <form method="POST" id="form" 
+      action="{{ '/edit/' + article.id if article else '/post' }}">
+      <div class="form-group">
+        <input name="header" class="form-control" placeholder="Заголовок" 
+          autofocus value="{{ article.header if article else '' }}"/>
+      </div>
+      <div class="form-group">
+        <input name="signature" class="form-control" placeholder="Подпись" 
+          value="{{ article.signature if article else '' }}"/>
+      </div>
+      <div class="form-group">
+        <textarea name="body" class="form-control" rows="10" placeholder="Ваша история">
+          {{- article.body if article else '' -}}
+        </textarea>
+      </div>
+      <div class="form-group">
+        <button class="btn btn-primary" type="submit">
+          {{ 'Обновить' if article else 'Опубликовать' }}
+        </button>
+      </div>
+    </form>
 
     <script>
       const formElement = document.getElementById("form")
