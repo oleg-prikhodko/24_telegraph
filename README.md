@@ -11,7 +11,7 @@ If you like to test it locally:
 $ pip install -r requirements.txt
 $ python server.py
 ```
-Site will be available at [http://localhost:5000]() by default
+Site will be available at [http://localhost]() by default
 
 # Project Goals
 
