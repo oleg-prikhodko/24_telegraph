@@ -1,6 +1,17 @@
 # Telegraph Clone
 
-{TODO. There will be project description}
+Anonymous article posting platform
+
+# Quickstart
+
+Online version is available at [telegraph-devman.herokuapp.com](https://telegraph-devman.herokuapp.com)
+
+If you like to test it locally:
+```bash
+$ pip install -r requirements.txt
+$ python server.py
+```
+Site will be available at [http://localhost:5000]() by default
 
 # Project Goals
 
