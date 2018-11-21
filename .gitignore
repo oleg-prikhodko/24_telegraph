@@ -2,3 +2,4 @@ venv
 .vscode
 articles/
 __pycache__
+*.pyc
