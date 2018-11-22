@@ -7,6 +7,11 @@ from flask import Flask, render_template, request, session, abort, redirect
 app = Flask(__name__)
 app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 
+NOT_FOUND_STATUS = 404
+FORBIDDEN_STATUS = 403
+INTERNAL_ERROR_STATUS = 500
+
+DEFAULT_PORT = 5000
 
 def authenticate():
     if "userid" not in session:
@@ -31,7 +36,7 @@ def get_article_page(article_id):
     authenticate()
     article = articles.load_article(article_id)
     if article is None:
-        abort(404)
+        abort(NOT_FOUND_STATUS)
 
     return render_template("article.html", article=article)
 
@@ -54,9 +59,9 @@ def get_edit_page(article_id):
     authenticate()
     article = articles.load_article(article_id)
     if article is None:
-        abort(404)
+        abort(NOT_FOUND_STATUS)
     if article["userid"] != session.get("userid"):
-        abort(403)
+        abort(FORBIDDEN_STATUS)
 
     return render_template("form.html", article=article)
 
@@ -66,9 +71,9 @@ def edit_article(article_id):
     authenticate()
     article = articles.load_article(article_id)
     if article is None:
-        abort(404)
+        abort(NOT_FOUND_STATUS)
     if article["userid"] != session.get("userid"):
-        abort(403)
+        abort(FORBIDDEN_STATUS)
 
     success = articles.update_article(
         article_id,
@@ -80,7 +85,7 @@ def edit_article(article_id):
     if success:
         return redirect("/articles/{}".format(article_id))
     else:
-        abort(500)
+        abort(INTERNAL_ERROR_STATUS)
 
 
 @app.route("/sessiontest")
@@ -88,11 +93,6 @@ def session_test():
     return "userid: {}".format(session.get("userid"))
 
 
-@app.route("/api/articles", methods=["PUT"])
-def update_article():
-    pass
-
-
 if __name__ == "__main__":
-    port = int(os.environ.get('PORT', 5000))
+    port = int(os.environ.get("PORT", DEFAULT_PORT))
     app.run(debug=True, host="0.0.0.0", port=port)
