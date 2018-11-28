@@ -28,22 +28,4 @@
       </div>
     </form>
 
-    <script>
-      const formElement = document.getElementById("form")
-
-      function postArticle(event) {
-        event.preventDefault()
-        const formData = new FormData(formElement)
-        const formValues = {}
-        formData.forEach((value, key) => formValues[key] = value)
-        
-        fetch('/api/articles', {
-          method: 'POST',
-          headers: {"Content-Type": "application/json; charset=utf-8"},
-          body: JSON.stringify(formValues)
-        })
-          .then(response => response.text())
-          .then(data => console.log(data))
-      }
-    </script>
 {% endblock %}
