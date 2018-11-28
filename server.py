@@ -95,4 +95,5 @@ def session_test():
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", DEFAULT_PORT))
-    app.run(debug=True, host="0.0.0.0", port=port)
+    debug = bool(os.environ.get("FLASK_DEBUG", False))
+    app.run(debug=debug, host="0.0.0.0", port=port)
