@@ -1,8 +1,9 @@
-from uuid import uuid1
 import os
+from uuid import uuid1
+
+from flask import Flask, abort, redirect, render_template, request, session, url_for
 
 import articles
-from flask import Flask, render_template, request, session, abort, redirect
 
 app = Flask(__name__)
 app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
@@ -51,7 +52,7 @@ def save_article():
         request.form.get("body"),
     )
 
-    return redirect("/articles/{}".format(article_id))
+    return redirect(url_for("get_article_page", article_id=article_id))
 
 
 @app.route("/edit/<article_id>")
@@ -83,14 +84,9 @@ def edit_article(article_id):
     )
 
     if success:
-        return redirect("/articles/{}".format(article_id))
+        return redirect(url_for("get_article_page", article_id=article_id))
     else:
         abort(INTERNAL_ERROR_STATUS)
-
-
-@app.route("/sessiontest")
-def session_test():
-    return "userid: {}".format(session.get("userid"))
 
 
 if __name__ == "__main__":

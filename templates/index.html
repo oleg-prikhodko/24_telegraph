@@ -8,9 +8,9 @@
     <ul>
         {% for article in article_list %}
             <li style="margin-bottom: 1rem;">
-                <a href="/articles/{{ article.id }}">{{ article.header }}</a>
+                <a href="{{ url_for('get_article_page', article_id=article.id) }}">{{ article.header }}</a>
                 {% if session.userid == article.userid %}
-                <a href="/edit/{{ article.id }}" class="text-danger">Edit</a>
+                <a href="{{ url_for('get_edit_page', article_id=article.id) }}" class="text-danger">Edit</a>
                 {% endif %}
             </li>
         {% endfor %}

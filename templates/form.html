@@ -7,7 +7,7 @@
 {% block body %}
     
     <form method="POST" id="form" 
-      action="{{ '/edit/' + article.id if article else '/post' }}">
+      action="{{ url_for('get_edit_page', article_id=article.id) if article else url_for('save_article') }}">
       <div class="form-group">
         <input name="header" class="form-control" placeholder="Заголовок" 
           autofocus value="{{ article.header if article else '' }}"/>
