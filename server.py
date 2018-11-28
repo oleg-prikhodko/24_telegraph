@@ -53,6 +53,9 @@ def get_article_page(article_id):
 
 @app.route("/post", methods=["POST"])
 def save_article():
+    """
+    Create NEW article
+    """
     authenticate()
     article_id = articles.save_article(
         session.get("userid"),
@@ -78,6 +81,9 @@ def get_edit_page(article_id):
 
 @app.route("/edit/<article_id>", methods=["POST"])
 def edit_article(article_id):
+    """
+    Update EXISTING article
+    """
     authenticate()
     article = articles.load_article(article_id)
     if article is None:
