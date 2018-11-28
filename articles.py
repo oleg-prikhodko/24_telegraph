@@ -65,6 +65,9 @@ def update_article(article_id, header=None, signature=None, body=None):
 
 
 def load_all_articles():
+    if not os.path.exists(ARTICLES_DIR_PATH):
+        return []
+        
     articles = [
         load_article(os.path.splitext(entry.name)[0])
         for entry in os.scandir(ARTICLES_DIR_PATH)
