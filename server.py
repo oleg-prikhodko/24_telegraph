@@ -28,7 +28,7 @@ def form():
 def list_articles():
     authenticate()
     article_list = articles.load_all_articles()
-    return render_template("list.html", article_list=article_list)
+    return render_template("index.html", article_list=article_list)
 
 
 @app.route("/articles/<article_id>")
