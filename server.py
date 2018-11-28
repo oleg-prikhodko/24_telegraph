@@ -1,7 +1,15 @@
 import os
 from uuid import uuid1
 
-from flask import Flask, abort, redirect, render_template, request, session, url_for
+from flask import (
+    Flask,
+    abort,
+    redirect,
+    render_template,
+    request,
+    session,
+    url_for,
+)
 
 import articles
 
@@ -13,6 +21,7 @@ FORBIDDEN_STATUS = 403
 INTERNAL_ERROR_STATUS = 500
 
 DEFAULT_PORT = 5000
+
 
 def authenticate():
     if "userid" not in session:
