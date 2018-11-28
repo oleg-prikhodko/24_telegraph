@@ -6,6 +6,9 @@ ARTICLES_DIR_PATH = "articles/"
 
 
 def save_article(userid, header, signature, body):
+    """
+    Creates new article using given parameters and saves it with unique ID
+    """
     article_info = {
         "userid": userid,
         "header": header,
@@ -38,6 +41,9 @@ def load_article(article_id):
 
 
 def update_article(article_id, header=None, signature=None, body=None):
+    """
+    Updates article information using given parameters
+    """
     article = load_article(article_id)
     if article is None:
         return False
